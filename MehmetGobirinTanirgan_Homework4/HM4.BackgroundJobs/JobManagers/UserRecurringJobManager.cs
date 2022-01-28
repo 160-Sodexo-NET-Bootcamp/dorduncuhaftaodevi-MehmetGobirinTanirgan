@@ -1,5 +1,6 @@
 ﻿using Hangfire;
 using HM4.BackgroundJobs.Jobs;
+using System;
 
 namespace HM4.BackgroundJobs.JobManagers
 {
@@ -9,14 +10,13 @@ namespace HM4.BackgroundJobs.JobManagers
         // 15 dakikada bir insert atma işi.
         public static void AddUsersEveryFifteenMinutes()
         {
-            RecurringJob.AddOrUpdate<UserJobs>("add-user-job", job => job.AddUserAsync(), "*/15 * * * *");
+            RecurringJob.AddOrUpdate<UserJobs>("add-user-job", job => job.AddUserAsync(), "*/15 * * * *", TimeZoneInfo.Local);
         }
 
         // Günlük status alanını güncelleyecek iş.
         public static void UpdateUserStatusDaily()
         {
-            // Burda CRON expression da 18 yerine 15 yazmamın sebebi saat farkı olmasından dolayı.
-            RecurringJob.AddOrUpdate<UserJobs>("update-users-job", job => job.UpdateStatusOfUsers(), "00 15 * * *");
+            RecurringJob.AddOrUpdate<UserJobs>("update-users-job", job => job.UpdateStatusOfUsers(), "00 18 * * *", TimeZoneInfo.Local);
         }
 
         // Burda da job id'ye göre job silme işlemi ekledim.
