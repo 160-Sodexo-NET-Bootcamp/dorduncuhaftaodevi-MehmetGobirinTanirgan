@@ -39,7 +39,7 @@ Table situation during daily update.
 
 Successed jobs during daily update.
 
-![](images/table-on-update.PNG)
+![](images/jobs-on-update.PNG)
 <br><br>
 
 4. After the daily update, first job kept inserting records.
